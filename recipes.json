@@ -1,0 +1,177 @@
+[
+  {
+    "name": "Chicken Stir Fry",
+    "ingredients": ["chicken breast", "onion", "garlic", "bell pepper", "soy sauce"],
+    "optional": ["ginger", "chili flakes"],
+    "protein": "chicken",
+    "cook_time": 25
+  },
+  {
+    "name": "Garlic Fried Rice",
+    "ingredients": ["rice", "garlic", "egg", "soy sauce"],
+    "optional": ["green onion"],
+    "protein": "egg",
+    "cook_time": 15
+  },
+  {
+    "name": "Chicken Rice Bowl",
+    "ingredients": ["chicken breast", "rice", "spinach"],
+    "optional": ["soy sauce"],
+    "protein": "chicken",
+    "cook_time": 20
+  },
+  {
+    "name": "Vegetable Omelette",
+    "ingredients": ["egg", "onion", "spinach"],
+    "optional": ["cheese"],
+    "protein": "egg",
+    "cook_time": 10
+  },
+  {
+    "name": "Pasta with Garlic and Oil",
+    "ingredients": ["pasta", "garlic", "olive oil"],
+    "optional": ["chili flakes", "parmesan"],
+    "protein": "vegetarian",
+    "cook_time": 20
+  },
+  {
+    "name": "Tomato Pasta",
+    "ingredients": ["pasta", "tomato", "garlic"],
+    "optional": ["onion", "basil"],
+    "protein": "vegetarian",
+    "cook_time": 25
+  },
+  {
+    "name": "Chicken Tomato Stew",
+    "ingredients": ["chicken breast", "tomato", "onion", "garlic"],
+    "optional": ["potato"],
+    "protein": "chicken",
+    "cook_time": 35
+  },
+  {
+    "name": "Spinach Egg Rice Bowl",
+    "ingredients": ["rice", "spinach", "egg"],
+    "optional": ["soy sauce"],
+    "protein": "egg",
+    "cook_time": 15
+  },
+  {
+    "name": "Vegetable Stir Fry",
+    "ingredients": ["onion", "bell pepper", "spinach", "soy sauce"],
+    "optional": ["tofu"],
+    "protein": "vegetarian",
+    "cook_time": 20
+  },
+  {
+    "name": "Chicken Fried Rice",
+    "ingredients": ["rice", "chicken breast", "egg", "garlic"],
+    "optional": ["soy sauce"],
+    "protein": "chicken",
+    "cook_time": 20
+  },
+  {
+    "name": "Egg Drop Soup",
+    "ingredients": ["egg", "garlic", "water"],
+    "optional": ["green onion"],
+    "protein": "egg",
+    "cook_time": 10
+  },
+  {
+    "name": "Spinach Garlic Pasta",
+    "ingredients": ["pasta", "spinach", "garlic"],
+    "optional": ["olive oil"],
+    "protein": "vegetarian",
+    "cook_time": 20
+  },
+  {
+    "name": "Chicken Spinach Saute",
+    "ingredients": ["chicken breast", "spinach", "garlic"],
+    "optional": ["lemon"],
+    "protein": "chicken",
+    "cook_time": 20
+  },
+  {
+    "name": "Vegetable Rice Bowl",
+    "ingredients": ["rice", "onion", "spinach"],
+    "optional": ["soy sauce"],
+    "protein": "vegetarian",
+    "cook_time": 15
+  },
+  {
+    "name": "Scrambled Eggs and Rice",
+    "ingredients": ["egg", "rice"],
+    "optional": ["soy sauce"],
+    "protein": "egg",
+    "cook_time": 10
+  },
+  {
+    "name": "Chicken Pasta",
+    "ingredients": ["pasta", "chicken breast", "garlic"],
+    "optional": ["olive oil"],
+    "protein": "chicken",
+    "cook_time": 25
+  },
+  {
+    "name": "Tomato Egg Stir Fry",
+    "ingredients": ["egg", "tomato"],
+    "optional": ["onion"],
+    "protein": "egg",
+    "cook_time": 15
+  },
+  {
+    "name": "Spinach Soup",
+    "ingredients": ["spinach", "garlic", "water"],
+    "optional": ["onion"],
+    "protein": "vegetarian",
+    "cook_time": 15
+  },
+  {
+    "name": "Chicken Veggie Bowl",
+    "ingredients": ["chicken breast", "onion", "spinach"],
+    "optional": ["rice"],
+    "protein": "chicken",
+    "cook_time": 20
+  },
+  {
+    "name": "Simple Tomato Soup",
+    "ingredients": ["tomato", "garlic", "water"],
+    "optional": ["onion"],
+    "protein": "vegetarian",
+    "cook_time": 20
+  },
+  {
+    "name": "Egg Fried Noodles",
+    "ingredients": ["noodles", "egg", "garlic"],
+    "optional": ["soy sauce"],
+    "protein": "egg",
+    "cook_time": 15
+  },
+  {
+    "name": "Chicken Noodles",
+    "ingredients": ["noodles", "chicken breast", "garlic"],
+    "optional": ["onion"],
+    "protein": "chicken",
+    "cook_time": 20
+  },
+  {
+    "name": "Vegetable Noodles",
+    "ingredients": ["noodles", "onion", "spinach"],
+    "optional": ["soy sauce"],
+    "protein": "vegetarian",
+    "cook_time": 15
+  },
+  {
+    "name": "Rice and Beans",
+    "ingredients": ["rice", "beans"],
+    "optional": ["onion", "garlic"],
+    "protein": "vegetarian",
+    "cook_time": 25
+  },
+  {
+    "name": "Chicken Bean Bowl",
+    "ingredients": ["chicken breast", "beans", "rice"],
+    "optional": ["onion"],
+    "protein": "chicken",
+    "cook_time": 30
+  }
+]
