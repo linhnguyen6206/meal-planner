@@ -1,72 +1,33 @@
+from http.server import BaseHTTPRequestHandler
 import json
-from collections import Counter
+import os
 
-# ---- load recipes ----
-with open("recipes.json") as f:
-    recipes = json.load(f)
+# Import your existing logic
+from inventory import build_inventory
+from meal_plan import generate_weekly_plan
 
-# ---- inventory helpers ----
-def build_inventory(ingredients):
-    return Counter(ingredients)
+class handler(BaseHTTPRequestHandler):
+    def do_POST(self):
+        # 1. Read the length of the incoming data
+        content_length = int(self.headers['Content-Length'])
+        post_data = self.rfile.read(content_length)
+        data = json.loads(post_data)
 
-def can_make_recipe(recipe, inventory):
-    for ingredient in recipe["ingredients"]:
-        if inventory[ingredient] <= 0:
-            return False
-    return True
+        # 2. Get ingredients from the user's input
+        user_ingredients = data.get("ingredients", [])
+        inventory = build_inventory(user_ingredients)
 
-def use_ingredients(recipe, inventory):
-    for ingredient in recipe["ingredients"]:
-        inventory[ingredient] -= 1
+        # 3. Load your recipes database
+        # In a Vercel environment, we use an absolute path for the JSON file
+        path_to_recipes = os.path.join(os.path.dirname(__file__), '..', 'recipes.json')
+        with open(path_to_recipes, 'r') as f:
+            recipes = json.load(f)
 
-def inventory_usage_score(recipe, inventory):
-    return sum(1 for i in recipe["ingredients"] if inventory[i] > 0)
+        # 4. Generate the 7-day plan
+        plan = generate_weekly_plan(inventory, recipes)
 
-def generate_weekly_plan(inventory, recipes):
-    plan = []
-    last_protein = None
-
-    for day in range(7):
-        feasible = [r for r in recipes if can_make_recipe(r, inventory)]
-        if not feasible:
-            break
-
-        feasible.sort(
-            key=lambda r: inventory_usage_score(r, inventory),
-            reverse=True
-        )
-
-        chosen = None
-        for r in feasible:
-            if r["protein"] != last_protein:
-                chosen = r
-                break
-
-        if chosen is None:
-            chosen = feasible[0]
-
-        use_ingredients(chosen, inventory)
-        plan.append({"day": f"Day {day+1}", "meal": chosen["name"]})
-        last_protein = chosen["protein"]
-
-    return plan
-
-# ---- Vercel handler ----
-def handler(request):
-    if request.method != "POST":
-        return {
-            "statusCode": 405,
-            "body": "Method not allowed"
-        }
-
-    data = json.loads(request.body)
-    ingredients = [i.strip().lower() for i in data["ingredients"]]
-
-    inventory = build_inventory(ingredients)
-    weekly_plan = generate_weekly_plan(inventory, recipes)
-
-    return {
-        "statusCode": 200,
-        "headers": {"Content-Type": "application/json"},
-        "body": json.dumps(weekly_plan)
-    }
+        # 5. Send the response back to index.html
+        self.send_response(200)
+        self.send_header('Content-Type', 'application/json')
+        self.end_headers()
+        self.wfile.write(json.dumps(plan).encode('utf-8'))

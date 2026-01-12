@@ -1,3 +1,5 @@
+from inventory import can_make_recipe, use_ingredients
+
 def inventory_usage_score(recipe, inventory):
     score = 0
     for ingredient in recipe["ingredients"]:
@@ -37,7 +39,7 @@ def generate_weekly_plan(inventory, recipes):
 
             use_ingredients(chosen_recipe, inventory)
 
-            weekly_plan append({
+            weekly_plan.append({
                 "day": f"Day {day + 1}",
                 "meal": chosen_recipe["name"],
                 "protein": chosen_recipe["protein"]
@@ -45,7 +47,7 @@ def generate_weekly_plan(inventory, recipes):
 
             last_protein = chosen_recipe["protein"]
 
-            return weekly_plan
+        return weekly_plan
 
     inventory = {
         "chicken breast": 3,
@@ -59,5 +61,5 @@ def generate_weekly_plan(inventory, recipes):
 
     weekly_plan = generate_weekly_plan(inventory, recipes)
 
-    for day in weekly_plan
+    for day in weekly_plan:
         print(day)

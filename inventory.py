@@ -9,17 +9,17 @@ def build_inventory(ingredient_list):
     
     return inventory
 
-def can_make_recipe(recipe, inventory) {
+def can_make_recipe(recipe, inventory):
     for ingredient in recipe["ingredients"]:
         if ingredient not in inventory or inventory[ingredient] <= 0:
             return False
     return True
-}
 
-def use_ingredients(recipe, inventory) {
-    for ingredient in recipe["ingredient"]:
+
+def use_ingredients(recipe, inventory):
+    for ingredient in recipe["ingredients"]:
         inventory[ingredient] -= 1
-}
+
 
 def match_recipes_with_inventory(inventory, recipes, threshold = 0.7):
     user_set = set(inventory.keys())
@@ -45,7 +45,7 @@ def match_recipes_with_inventory(inventory, recipes, threshold = 0.7):
 user_ingredients = [
     "chicken breast", "chicken breast",
     "egg", "egg", "egg",
-    "rice"., "rice",
+    "rice", "rice",
     "garlic", "onion", "spinach"
 ]
 
