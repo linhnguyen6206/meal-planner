@@ -1,33 +1,53 @@
 from http.server import BaseHTTPRequestHandler
 import json
 import os
+import sys
 
-# Import your existing logic
-from inventory import build_inventory
-from meal_plan import generate_weekly_plan
+# --- THE FIX FOR THE 500 ERROR ---
+# This forces Python to look in the main folder for your other files
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+sys.path.append(parent_dir)
+# ---------------------------------
 
 class handler(BaseHTTPRequestHandler):
     def do_POST(self):
-        # 1. Read the length of the incoming data
-        content_length = int(self.headers['Content-Length'])
-        post_data = self.rfile.read(content_length)
-        data = json.loads(post_data)
+        try:
+            # 1. Try to import your files here (inside the try block)
+            # If this fails, we will catch the error below
+            from inventory import build_inventory
+            from meal_plan import generate_weekly_plan
 
-        # 2. Get ingredients from the user's input
-        user_ingredients = data.get("ingredients", [])
-        inventory = build_inventory(user_ingredients)
+            content_length = int(self.headers['Content-Length'])
+            post_data = self.rfile.read(content_length)
+            data = json.loads(post_data)
 
-        # 3. Load your recipes database
-        # In a Vercel environment, we use an absolute path for the JSON file
-        path_to_recipes = os.path.join(os.path.dirname(__file__), '..', 'recipes.json')
-        with open(path_to_recipes, 'r') as f:
-            recipes = json.load(f)
+            user_ingredients = data.get("ingredients", [])
+            inventory = build_inventory(user_ingredients)
 
-        # 4. Generate the 7-day plan
-        plan = generate_weekly_plan(inventory, recipes)
+            # 2. Fix the path to recipes.json
+            path_to_recipes = os.path.join(parent_dir, 'recipes.json')
+            
+            # Check if recipes.json actually exists
+            if not os.path.exists(path_to_recipes):
+                raise FileNotFoundError(f"Cannot find file at: {path_to_recipes}")
 
-        # 5. Send the response back to index.html
-        self.send_response(200)
-        self.send_header('Content-Type', 'application/json')
-        self.end_headers()
-        self.wfile.write(json.dumps(plan).encode('utf-8'))
+            with open(path_to_recipes, 'r') as f:
+                recipes = json.load(f)
+
+            plan = generate_weekly_plan(inventory, recipes)
+
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json')
+            self.end_headers()
+            self.wfile.write(json.dumps(plan).encode('utf-8'))
+
+        except Exception as e:
+            # --- ERROR REPORTER ---
+            # If it crashes, this sends the specific error to your browser
+            error_message = f"CRITICAL ERROR: {str(e)}"
+            print(error_message) # Print to terminal
+            
+            self.send_response(500)
+            self.end_headers()
+            self.wfile.write(json.dumps({"error": error_message}).encode('utf-8'))
