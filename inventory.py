@@ -41,20 +41,3 @@ def match_recipes_with_inventory(inventory, recipes, threshold = 0.7):
             })
     matched_recipes.sort(key = lambda x: x["score"], reverse = True)
     return matched_recipes
-
-user_ingredients = [
-    "chicken breast", "chicken breast",
-    "egg", "egg", "egg",
-    "rice", "rice",
-    "garlic", "onion", "spinach"
-]
-
-inventory = build_inventory(user_ingredients)
-
-matches = match_recipes_with_inventory(inventory, recipes)
-
-chosen_recipe = matches[0]
-use_ingredients(chosen_recipe, inventory)
-
-print("Cooked: ", chosen_recipe["name"])
-print("Remaining inventory: ", inventory)
