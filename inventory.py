@@ -8,9 +8,6 @@ def build_inventory(ingredient_list):
     return inventory
 
 def can_make_recipe(recipe, inventory):
-    # --- SMARTER LOGIC ---
-    # Instead of returning False immediately, we count missing items.
-    # We allow up to 2 missing ingredients.
     missing_count = 0
     for ingredient in recipe["ingredients"]:
         if ingredient not in inventory or inventory[ingredient] <= 0:
