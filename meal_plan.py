@@ -48,18 +48,3 @@ def generate_weekly_plan(inventory, recipes):
             last_protein = chosen_recipe["protein"]
 
         return weekly_plan
-
-    inventory = {
-        "chicken breast": 3,
-        "egg": 5,
-        "rice": 4,
-        "garlic": 5,
-        "onion": 3,
-        "spinach": 2,
-        "soy sauce": 1
-    }
-
-    weekly_plan = generate_weekly_plan(inventory, recipes)
-
-    for day in weekly_plan:
-        print(day)
